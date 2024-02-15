@@ -4,6 +4,7 @@ import Content from "./Content";
 import Footer from "./Footer";
 import Header from "./Header";
 import AddItem from "./AddItem";
+import SearchItem from "./SearchItem";
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
     ]);
 
     const [newItem, setNewItem] = useState('');
+    const [search, setSearch] = useState('');
 
     const addItem = (item) => {
         const id = items[items.length-1].id + 1;
@@ -61,8 +63,12 @@ function App() {
                 setNewItem={setNewItem}
                 handleSubmit={handleSubmit}
             />
+            <SearchItem
+                search={search}
+                setSearch={setSearch}
+            />
             <Content  
-				items={items}
+				items={items.filter(item => ((item.item).toLowerCase()).includes(search.toLowerCase()))}
 				handleCheck={handleCheck}
 				handleDelete={handleDelete}
 			/>
